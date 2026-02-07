@@ -20,7 +20,7 @@ import java.util.*;
  * v 1.1.6 - Incorpora método para dibujar texto centrado
  * v 1.1.5 - Incorpora método para cambiar el tipo de letra de la línea de mensajes, método para consultar el mensaje actual
  * v 1.1.4 - Incorpora métodos para pedir datos desde teclado
- */
+ */ 
 public class VentanaGrafica {
 	
 	// ====================================================
