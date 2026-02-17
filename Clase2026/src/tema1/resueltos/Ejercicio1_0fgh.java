@@ -33,7 +33,7 @@ public class Ejercicio1_0fgh {
 	static void sacarMenorYMayor() {   // hemos mejorado el naming desde "sacarMenor"
 		String menor = "zzz";
 		for (int i=0; i<listaNombres.length; i++) {   // mejor listaNombres.length el 6
-			if (listaNombres[i].compareTo( menor ) < 0) {   // TODO OBSERVAD LA DIFERENCIA SINTAXIS EN OBJETOS!!!
+			if (listaNombres[i].compareTo( menor ) < 0) {   // OBSERVAD LA DIFERENCIA SINTAXIS EN OBJETOS!!!
 				menor = listaNombres[i];
 			}
 		}
