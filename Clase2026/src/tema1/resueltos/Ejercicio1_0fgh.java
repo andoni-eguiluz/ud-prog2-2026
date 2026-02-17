@@ -9,8 +9,9 @@ public class Ejercicio1_0fgh {
 	public static void main(String[] args) {
 		inicializar();
 		visualizar();
-		sacarMenor();
+		sacarMenorYMayor();
 		ordenarNombres();
+		System.out.println( "a".compareTo("C") );  // Pruebita
 	}
 	
 	static void inicializar() {
@@ -29,9 +30,9 @@ public class Ejercicio1_0fgh {
 		System.out.println();  // Para sacar salto de línea al final
 	}
 	
-	static void sacarMenor() {   // TODO mejorar naming?
+	static void sacarMenorYMayor() {   // hemos mejorado el naming desde "sacarMenor"
 		String menor = "zzz";
-		for (int i=0; i<6; i++) {   // TODO ¿mejorar el 6?
+		for (int i=0; i<listaNombres.length; i++) {   // mejor listaNombres.length el 6
 			if (listaNombres[i].compareTo( menor ) < 0) {   // TODO OBSERVAD LA DIFERENCIA SINTAXIS EN OBJETOS!!!
 				menor = listaNombres[i];
 			}
