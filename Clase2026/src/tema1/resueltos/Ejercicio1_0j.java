@@ -4,7 +4,7 @@ package tema1.resueltos;
  */
 public class Ejercicio1_0j {
 	
-	private static int TAMANYO_FIBS = 100; // Cambiar a 2000 si se quieren encontrar los límites de float y double
+	static int TAMANYO_FIBS = 100; // Cambiar a 2000 si se quieren encontrar los límites de float y double
 	public static void main(String[] args) {
 		byte[] numsByte = new byte[TAMANYO_FIBS];
 		short[] numsShort = new short[TAMANYO_FIBS];
