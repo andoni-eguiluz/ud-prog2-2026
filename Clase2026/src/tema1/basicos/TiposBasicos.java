@@ -68,11 +68,11 @@ public class TiposBasicos {
 		System.out.println( "Valor mayor de double: " + Double.MAX_VALUE );
 		// REALES: NO COMPARAR CON ==  !=
 		// Cómo comparar dos doubles?  aproximar en los decimales necesarios
-		double double1 = 5.0031;
-		double double2 = 5.0032;
+		double double1 = 0.3;
+		double double2 = 0.1 + 0.2;
 		// if (double1==double2) {
-		System.out.println( double1 + " y " + double2 + " son iguales? " + (double1==double2) );
-		if (Math.abs(double2-double1) < 0.001) {
+		System.out.println( double1 + " y " + double2 + " son iguales? " + (double1==double2) );   //   HALA!!!!!!!!!!!
+		if (Math.abs(double2-double1) < 0.0000001) {
 			System.out.println( double1 + " y " + double2 + " son *aproximadamente* iguales");
 		}
 		// REALES: NO HAY ERRORES DE VALOR EN EJECUCIÓN
