@@ -9,34 +9,44 @@ public class Ejercicio1_0i {
 	//	(de mayor a menor).
 
 	public static void main(String[] args) {
-		String[] usuarios = { "@sama", "@BillGates", "@JeffBezos", "@elonmusk" };
-		int[] seguidores = { 3400, 66000, 6700, 217700 };
+//		String[] usuarios = { "@sama", "@BillGates", "@JeffBezos", "@elonmusk" };
+//		int[] seguidores = { 3400, 66000, 6700, 217700 };
+		UsuarioRedSocial[] listaUsuarios = { new UsuarioRedSocial( "@sama", 3400 ),
+				new UsuarioRedSocial( "@BillGates", 66000), new UsuarioRedSocial( "@JeffBezos", 6700),
+				new UsuarioRedSocial( "@elonmusk", 217700 ) };
 		System.out.println( "Lista original:" );
-		visualizarUsuariosYSeguidores( usuarios, seguidores );
-		ordenaUsuariosPorSeguidores( usuarios, seguidores );
+		visualizarUsuariosYSeguidores( listaUsuarios );
+		ordenaUsuariosPorSeguidores( listaUsuarios );
 		System.out.println( "Lista ordenada:" );
-		visualizarUsuariosYSeguidores( usuarios, seguidores );
+		visualizarUsuariosYSeguidores( listaUsuarios );
 	}
 	
 	// Visualiza línea a línea usuario tabulador nº seguidores
-	private static void visualizarUsuariosYSeguidores(String[] usuarios, int[] seguidores) {
-		for (int i=0; i<usuarios.length; i++) {
-			System.out.println( usuarios[i] + "\t" + seguidores[i] );
+	private static void visualizarUsuariosYSeguidores(UsuarioRedSocial[] listaUsuarios ) {
+		for (int i=0; i<listaUsuarios.length; i++) {
+//			System.out.println( usuarios[i] + "\t" + seguidores[i] );
+			System.out.println( listaUsuarios[i] );
 		}
 	}
 	
 	// Ordenación bubble
-	private static void ordenaUsuariosPorSeguidores(String[] usuarios, int[] seguidores) {
-		for (int pasada=0; pasada<usuarios.length-1; pasada++) {
-			for (int comp=0; comp<usuarios.length-1; comp++) {  // TODO mejorar que solo se hagan las comparaciones necesarias
-				boolean hayQueIntercambiar = seguidores[comp] < seguidores[comp+1];
+	private static void ordenaUsuariosPorSeguidores(UsuarioRedSocial[] listaUsuarios ) {
+		for (int pasada=0; pasada<listaUsuarios.length-1; pasada++) {
+			for (int comp=0; comp<listaUsuarios.length-1; comp++) {  // TODO mejorar que solo se hagan las comparaciones necesarias
+//				boolean hayQueIntercambiar = seguidores[comp] < seguidores[comp+1];
+//				if (hayQueIntercambiar) {
+//					int aux = seguidores[comp];
+//					seguidores[comp] = seguidores[comp+1];
+//					seguidores[comp+1] = aux;
+//					String auxNombre = usuarios[comp];
+//					usuarios[comp] = usuarios[comp+1];
+//					usuarios[comp+1] = auxNombre;
+//				}
+				boolean hayQueIntercambiar = listaUsuarios[comp].numSeguidores < listaUsuarios[comp+1].numSeguidores;
 				if (hayQueIntercambiar) {
-					int aux = seguidores[comp];
-					seguidores[comp] = seguidores[comp+1];
-					seguidores[comp+1] = aux;
-					String auxNombre = usuarios[comp];
-					usuarios[comp] = usuarios[comp+1];
-					usuarios[comp+1] = auxNombre;
+					UsuarioRedSocial aux = listaUsuarios[comp];
+					listaUsuarios[comp] = listaUsuarios[comp+1];
+					listaUsuarios[comp+1] = aux;
 				}
 			}
 		}

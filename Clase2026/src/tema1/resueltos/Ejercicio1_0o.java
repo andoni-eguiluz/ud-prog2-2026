@@ -23,6 +23,7 @@ public class Ejercicio1_0o {
         System.out.print( "1 1 ");
         BigInteger a = BigInteger.ONE;
         BigInteger b = BigInteger.ONE;
+        // b = new BigInteger( "1" );
         BigInteger temp;
         for (int i = 3; i <= Ejercicio1_0j.TAMANYO_FIBS; i++) {
             temp = a.add(b);
