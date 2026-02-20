@@ -7,7 +7,11 @@ public class Ejercicio1_0o {
     public static void main(String[] args) {
         // Calcular Fibonacci(100)
         BigInteger fibonacci100 = fibonacci(100);
-        System.out.println("Fibonacci(100): " + fibonacci100 + "\n" );
+        System.out.println("Fibonacci(100): " + fibonacci100 );
+        BigInteger fib500000 = fibonacci(500000);
+        System.out.println("Fibonacci(500000): " + fib500000 );
+        System.out.println( "  (" + (""+fib500000).length()  + " dígitos!) \n" );
+        	// Más de 100.000 dígitos - Hasta con doubles un número así sería ya INFINITY)
 
         // Calcular 50!
         BigInteger factorial = factorial(50);
