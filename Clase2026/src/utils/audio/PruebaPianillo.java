@@ -37,7 +37,7 @@ public class PruebaPianillo {
         	// Quitar los silencios si se quiere arpegiar
         	// Pianillo.mandaSilencio( 1, 0.2 );
         	// Pianillo.mandaSilencio( 2, 0.4 );
-        	for (int j = 0; j<3; j++) {
+        	for (int j = 0; j<acordeMayor.length; j++) {
         		boolean tipoAcorde = mayoresOMenores[j];
         		int salto = tipoAcorde ? acordeMayor[j] : acordeMenor[j];
                 Pianillo.mandaSonido( j, 

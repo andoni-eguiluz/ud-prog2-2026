@@ -210,35 +210,93 @@ public class Pianillo {
         }
     }
 
-    /** Crea una nota musical partiendo de su frecuencia, en forma de samples de audio
-     * @param hz	Frecuencia en Hz (por ejemplo 440 Hz = LA central -octava 4-)
-     * @param duration	Duración en segundos
-     * @param amplitud	Volumen (0 - 1.0)
-     * @return	Samples de audio correspondientes a esa nota
+    /** Crea una nota musical partiendo de su frecuencia, en forma de samples de audio.
+     * @param hz       Frecuencia en Hz (por ejemplo 440 Hz = LA central -octava 4-)
+     * @param duration Duración en segundos
+     * @param amplitud Volumen (0 - 1.0)
+     * @return         Samples de audio correspondientes a esa nota
      */
+    // Versión mejorada marzo 2026 con armónicos y envelope ADSR para sonido más natural.
     public static double[] samplesDeNota(double hz, double duration, double amplitud) {
-    	// Cálculo de corrección de volumen (el oído humano no percibe de forma regular el volumen por frecuencias)
-    	// (implementado de forma manual - a la espera de mejora)
-    	double corrVolumen = 1.0;
-    	if (hz < 277.182631) 
-        	corrVolumen = Math.pow( Math.abs( hz - 262.0)*0.004, 12.0) * 52.0 + 6.0;
-    	else if (hz <= 739.9888454) 
-        	corrVolumen = Math.pow( Math.abs( hz - 275.0), 2.0 ) / 75000.0 + 5.9;
-    	else if (hz < 1975.533205)
-        	corrVolumen = Math.pow( Math.abs( hz - 1870.0) * 0.0014, 2.0 ) + 0.5;
-    	else 
-    		corrVolumen = Math.pow( Math.abs( hz - 3135.0) * 0.0011, 1.2 ) * 0.125 + 0.25;
-    	// Cálculo de una senoidal pura de valores double con la frecuencia de la nota
         int n = (int) (SAMPLES_POR_SEG * duration);
-        double[] ret = new double[n+1];
+        double[] ret = new double[n + 1];
+        // --- Armónicos: [múltiplo de frecuencia, amplitud relativa] ---
+        // Simula un piano/cuerdas pulsadas (serie de Fourier aproximada)
+        double[][] armonicos = {
+            { 1.0, 1.00 },   // Fundamental
+            { 2.0, 0.50 },   // 2º armónico (octava)
+            { 3.0, 0.25 },   // 3º armónico (quinta)
+            { 4.0, 0.12 },   // 4º armónico
+            { 5.0, 0.06 },   // 5º armónico
+            { 6.0, 0.03 },   // 6º armónico
+        };
+        // Normalizar suma de amplitudes para no superar 1.0
+        double sumaArmonicos = 0;
+        for (double[] arm : armonicos) sumaArmonicos += arm[1];
+        // --- Parámetros ADSR (en fracción de la duración total) ---
+        double attackSecs  = Math.min(0.01, duration * 0.05);  // 5% o máx 10ms
+        double decaySecs   = Math.min(0.08, duration * 0.15);  // 15% o máx 80ms
+        double sustainLevel = 0.65;                            // 65% del volumen pico
+        double releaseSecs = Math.min(0.15, duration * 0.20);  // 20% o máx 150ms
+        int attackSamples  = (int) (SAMPLES_POR_SEG * attackSecs);
+        int decaySamples   = (int) (SAMPLES_POR_SEG * decaySecs);
+        int releaseSamples = (int) (SAMPLES_POR_SEG * releaseSecs);
+        int sustainEnd     = n - releaseSamples;
         for (int i = 0; i <= n; i++) {
-        	double vol = amplitud;
-        	if (n > FADE_IN_OUT*4 && i < FADE_IN_OUT) vol = amplitud * i / 2000; // Fadein de entrada de audio
-        	else if (n > FADE_IN_OUT*4 && i >= n-FADE_IN_OUT) vol = amplitud * (n-1-i) / 2000; // Fadeout de salida de audio
-            ret[i] = vol * Math.sin(2 * Math.PI * i * hz / SAMPLES_POR_SEG) * corrVolumen;
+            // --- Envelope ADSR ---
+            double env;
+            if (i < attackSamples) {
+                // Attack: sube de 0 a 1
+                env = (double) i / attackSamples;
+            } else if (i < attackSamples + decaySamples) {
+                // Decay: baja de 1 a sustainLevel
+                double t = (double) (i - attackSamples) / decaySamples;
+                env = 1.0 - t * (1.0 - sustainLevel);
+            } else if (i < sustainEnd) {
+                // Sustain: nivel constante
+                env = sustainLevel;
+            } else {
+                // Release: baja de sustainLevel a 0
+                double t = (double) (i - sustainEnd) / releaseSamples;
+                env = sustainLevel * (1.0 - t);
+            }
+            // --- Suma de armónicos ---
+            double muestra = 0;
+            for (double[] arm : armonicos) {
+                double freqArm = hz * arm[0];
+                // Evitar aliasing: ignorar armónicos sobre Nyquist
+                if (freqArm < SAMPLES_POR_SEG / 2.0) {
+                    muestra += arm[1] * Math.sin(2 * Math.PI * i * freqArm / SAMPLES_POR_SEG);
+                }
+            }
+            muestra /= sumaArmonicos;  // Normalizar
+            ret[i] = amplitud * env * muestra;
         }
         return ret;
-    }
+    }    
+
+// Versión previa implementada de forma manual (mucho peor)
+//    {
+//    	double corrVolumen = 1.0;
+//    	if (hz < 277.182631) 
+//        	corrVolumen = Math.pow( Math.abs( hz - 262.0)*0.004, 12.0) * 52.0 + 6.0;
+//    	else if (hz <= 739.9888454) 
+//        	corrVolumen = Math.pow( Math.abs( hz - 275.0), 2.0 ) / 75000.0 + 5.9;
+//    	else if (hz < 1975.533205)
+//        	corrVolumen = Math.pow( Math.abs( hz - 1870.0) * 0.0014, 2.0 ) + 0.5;
+//    	else 
+//    		corrVolumen = Math.pow( Math.abs( hz - 3135.0) * 0.0011, 1.2 ) * 0.125 + 0.25;
+//    	// Cálculo de una senoidal pura de valores double con la frecuencia de la nota
+//        int n = (int) (SAMPLES_POR_SEG * duration);
+//        double[] ret = new double[n+1];
+//        for (int i = 0; i <= n; i++) {
+//        	double vol = amplitud;
+//        	if (n > FADE_IN_OUT*4 && i < FADE_IN_OUT) vol = amplitud * i / 2000; // Fadein de entrada de audio
+//        	else if (n > FADE_IN_OUT*4 && i >= n-FADE_IN_OUT) vol = amplitud * (n-1-i) / 2000; // Fadeout de salida de audio
+//            ret[i] = vol * Math.sin(2 * Math.PI * i * hz / SAMPLES_POR_SEG) * corrVolumen;
+//        }
+//        return ret;
+//    }
 
     /** Devuelve la frecuencia de una nota referida a una octava de piano estándar
      * https://es.wikipedia.org/wiki/Frecuencias_de_afinaci%C3%B3n_del_piano
