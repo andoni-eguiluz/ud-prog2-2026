@@ -898,6 +898,52 @@ public class VentanaGrafica {
 
 		// Variable local para guardar las imágenes y no recargarlas cada vez
 		private static volatile HashMap<String,ImageIcon> recursosGraficos = new HashMap<>();
+
+	/** Carga una imagen de un fichero gráfico y dibuja en la ventana únicamente la región
+	 * de píxeles de la imagen fuente comprendida entre (desdeX, desdeY) y (hastaX, hastaY).
+	 * El resto de parámetros (posición, tamaño de destino, zoom, rotación y opacidad) se
+	 * comportan exactamente igual que en {@link #dibujaImagen(String, double, double, int, int, double, double, float)}.
+	 * Si la imagen no puede cargarse, no se dibuja nada.
+	 * El recurso gráfico se busca en el paquete de esta clase o en la clase llamadora.
+	 * El recurso gráfico se carga en memoria, de modo que al volver a dibujarlo no se recarga de fichero.
+	 * @param recursoGrafico	Nombre del fichero (path absoluto desde la carpeta raíz de clases del proyecto o relativo desde este paquete)  (p. ej. "img/prueba.png")
+	 * @param centroX		Coordenada x de la ventana donde colocar el centro del recorte dibujado
+	 * @param centroY		Coordenada y de la ventana donde colocar el centro del recorte dibujado
+	 * @param anchuraDibujo	Píxeles de anchura con los que dibujar el recorte en la ventana (se escala)
+	 * @param alturaDibujo	Píxeles de altura con los que dibujar el recorte en la ventana (se escala)
+	 * @param zoom			Zoom a aplicar (mayor que 1 aumenta, menor que 1 y mayor que 0 disminuye)
+	 * @param radsRotacion	Rotación en radianes
+	 * @param opacity		Opacidad (0.0f = totalmente transparente, 1.0f = totalmente opaca)
+	 * @param desdeX		Píxel x inicial de la región fuente dentro de la imagen (inclusive)
+	 * @param hastaX		Píxel x final   de la región fuente dentro de la imagen (exclusive)
+	 * @param desdeY		Píxel y inicial de la región fuente dentro de la imagen (inclusive)
+	 * @param hastaY		Píxel y final   de la región fuente dentro de la imagen (exclusive)
+	 */
+	public void dibujaParteImagen( String recursoGrafico, double centroX, double centroY,
+			int anchuraDibujo, int alturaDibujo, double zoom, double radsRotacion, float opacity,
+			int desdeX, int hastaX, int desdeY, int hastaY ) {
+		ImageIcon ii = getRecursoGrafico(recursoGrafico); if (ii==null) return;
+		graphics.setRenderingHint(RenderingHints.KEY_INTERPOLATION, RenderingHints.VALUE_INTERPOLATION_BILINEAR);
+		graphics.setRenderingHint(RenderingHints.KEY_RENDERING,     RenderingHints.VALUE_RENDER_QUALITY);
+		graphics.setRenderingHint(RenderingHints.KEY_ANTIALIASING,  RenderingHints.VALUE_ANTIALIAS_ON);
+		graphics.translate( calcX(centroX) - anchuraDibujo/2*escalaDibujo,
+		                    calcY(centroY) - alturaDibujo/2*escalaDibujo );
+		graphics.rotate( radsRotacion, anchuraDibujo/2*escalaDibujo, alturaDibujo/2*escalaDibujo );
+		graphics.setComposite( AlphaComposite.getInstance( AlphaComposite.SRC_OVER, opacity ) );
+		int anchoDibujado = (int)Math.round( anchuraDibujo * zoom * escalaDibujo );
+		int altoDibujado  = (int)Math.round( alturaDibujo  * zoom * escalaDibujo );
+		int difAncho = (int)( (anchuraDibujo * escalaDibujo - anchoDibujado) / 2 );  // Offset x para centrar
+		int difAlto  = (int)( (alturaDibujo  * escalaDibujo - altoDibujado ) / 2 );  // Offset y para centrar
+		// drawImage con coordenadas fuente (sx1,sy1,sx2,sy2): dibuja solo la region indicada de la imagen
+		// escalándola para que ocupe el rectangulo destino (difAncho,difAlto) -> (difAncho+anchoDibujado, difAlto+altoDibujado)
+		graphics.drawImage( ii.getImage(),
+				difAncho, difAlto, difAncho + anchoDibujado, difAlto + altoDibujado,  // destino
+				desdeX, desdeY, hastaX, hastaY,                                        // fuente (recorte)
+				null );
+		graphics.setTransform( new AffineTransform() );
+		graphics.setComposite( AlphaComposite.getInstance( AlphaComposite.SRC_OVER, 1f ) );
+		if (dibujadoInmediato) repaint();
+	}
 		
 	/** Carga una imagen de un fichero gráfico y la dibuja en la ventana. Si la imagen no puede cargarse, no se dibuja nada.
 	 * El recurso gráfico se busca en el paquete de esta clase o en la clase llamadora.
@@ -975,6 +1021,8 @@ public class VentanaGrafica {
 			}
 			return ii;
 		}
+	
+
 	
 	
 		private transient JPanel pBotonera = null;
