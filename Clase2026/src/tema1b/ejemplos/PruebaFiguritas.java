@@ -34,9 +34,9 @@ public class PruebaFiguritas {
 		ArrayList<Figura> lF = new ArrayList<>();
 		lF.add( c1 );
 		lF.add( r1 );
-		System.out.println( lF );
+		System.out.println( lF ); // Polimorfismo de código
 		for (Figura f : lF) {
-			f.dibujar(v);
+			f.dibujar(v);  // Polimorfismo de código
 		}
 	}
 }
