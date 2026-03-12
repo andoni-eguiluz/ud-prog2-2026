@@ -999,24 +999,32 @@ public class VentanaGrafica {
 				try {
 					ii = new ImageIcon( VentanaGrafica.class.getResource( recursoGrafico ));
 					recursosGraficos.put( recursoGrafico, ii );
-				} catch (NullPointerException e) {  // Mirar si está en la clase llamadora en lugar de en la ventana gráfica
-					StackTraceElement[] stElements = Thread.currentThread().getStackTrace();
-					for (int i=1; i<stElements.length; i++) {
-						StackTraceElement ste = stElements[i];
-						if ( !ste.getClassName().endsWith("VentanaGrafica") ) {  // Busca la clase llamadora a VentanaGrafica y busca ahí el recurso
-							try {
-								Class<?> c = Class.forName( ste.getClassName() );
-								URL url = c.getResource( recursoGrafico );
-								if (url==null) return null;
-								ii = new ImageIcon( url );
-								recursosGraficos.put( recursoGrafico, ii );
-								return ii;
-							} catch (ClassNotFoundException e1) {
-								return null;
+				} catch (NullPointerException e2) {  // Mirar si está en la clase llamadora en lugar de en la ventana gráfica
+					try {
+						ii = new ImageIcon( recursoGrafico );
+						recursosGraficos.put( recursoGrafico, ii );
+						if (ii==null || ii.getIconHeight()<0 || ii.getIconWidth()<0) {
+							throw new NullPointerException();
+						}
+					} catch (NullPointerException e) {  // Mirar si está en la clase llamadora en lugar de en la ventana gráfica
+						StackTraceElement[] stElements = Thread.currentThread().getStackTrace();
+						for (int i=1; i<stElements.length; i++) {
+							StackTraceElement ste = stElements[i];
+							if ( !ste.getClassName().endsWith("VentanaGrafica") ) {  // Busca la clase llamadora a VentanaGrafica y busca ahí el recurso
+								try {
+									Class<?> c = Class.forName( ste.getClassName() );
+									URL url = c.getResource( recursoGrafico );
+									if (url==null) return null;
+									ii = new ImageIcon( url );
+									recursosGraficos.put( recursoGrafico, ii );
+									return ii;
+								} catch (ClassNotFoundException e1) {
+									return null;
+								}
 							}
 						}
+						return null;
 					}
-					return null;
 				}			
 			}
 			return ii;
