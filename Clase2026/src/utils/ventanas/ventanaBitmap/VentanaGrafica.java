@@ -1020,9 +1020,28 @@ public class VentanaGrafica {
 				}			
 			}
 			return ii;
-		}
-	
+		}	
 
+	/** Chequea si existe una imagen
+	 * @param imagen	Nombre del fichero (path absoluto desde la carpeta raíz de clases del proyecto o relativo desde este paquete)  (p. ej. "img/prueba.png")
+	 * @return	true si existe, false si no
+	 */
+	public boolean existeImagen( String imagen ) {
+		ImageIcon ii = getRecursoGrafico( imagen );
+		return (ii==null);
+	}
+	
+	/** Devuelve el tamaño de una imagen
+	 * @param imagen	Nombre del fichero (path absoluto desde la carpeta raíz de clases del proyecto o relativo desde este paquete)  (p. ej. "img/prueba.png")
+	 * @return	null si la imagen no existe, el rectángulo de anchura y altura de la imagen si existe
+	 */
+	public Rectangle getTamanyoImagen( String imagen ) {
+		ImageIcon ii = getRecursoGrafico( imagen );
+		if (ii==null) return null;
+		return new Rectangle( ii.getIconWidth(), ii.getIconHeight() );
+	}
+
+		
 	
 	
 		private transient JPanel pBotonera = null;
