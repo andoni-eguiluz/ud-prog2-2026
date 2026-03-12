@@ -25,13 +25,18 @@ public class ImagenEscalada extends Imagen {
 		if (r.width == ancho && r.height==alto) {
 			return new Imagen( x, y, imagen, 1.0 );
 		} else {
-			return new ImagenEscalada(x, y, imagen, ancho, alto);
+			return new ImagenEscalada(x, y, imagen, ancho, alto );
 		}
 	}
 	
 	@Override
 	public void dibujar(VentanaGrafica vent) {
 		vent.dibujaImagen( getImagen(), getX(), getY(), ancho, alto, getZoom(), 0.0, 1.0f );
+	}
+	
+	@Override
+	public String toString() {
+		return "ImagenEscalada " + super.toString();
 	}
 	
 }

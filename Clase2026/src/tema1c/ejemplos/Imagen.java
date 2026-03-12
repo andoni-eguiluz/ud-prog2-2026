@@ -47,4 +47,9 @@ public class Imagen extends Figura {
 		v.dibujaImagen(imagen, x, y, zoom, 0.0, 1.0f );
 	}
 
+	@Override
+	public String toString() {
+		return "Imagen " + super.toString();
+	}
+	
 }

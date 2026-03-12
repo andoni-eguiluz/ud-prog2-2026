@@ -6,6 +6,7 @@ import java.util.ArrayList;
 import utils.ventanas.ventanaBitmap.VentanaGrafica;
 
 public class PruebaFiguritas {
+	
 	public static void main(String[] args) {
 		VentanaGrafica v = new VentanaGrafica( 600, 400, "Prueba" );
 		Circulo c1 = new Circulo( 50, Color.BLUE, 200, 100 );
@@ -18,6 +19,8 @@ public class PruebaFiguritas {
 		lF.add( new Flecha( 100, 100, 200, 200) );
 		lF.add( new Imagen( 200, 200, "sonic.png", 1.00) );
 		lF.add( new ImagenEscalada( 300, 300, "dama-blanca.png", 150, 150 ) );
+		Imagen i = ImagenEscalada.crear( 450, 170, "bubble.png", 640, 627, v );
+		lF.add( i );
 		System.out.println( lF ); // Polimorfismo de código
 		for (Figura f : lF) {
 			f.dibujar(v);  // Polimorfismo de código
