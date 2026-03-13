@@ -22,8 +22,25 @@ public class PruebaFiguritas {
 		Imagen i = ImagenEscalada.crear( 450, 170, "bubble.png", 640, 627, v );
 		lF.add( i );
 		System.out.println( lF ); // Polimorfismo de código
+		Flecha f2 = new Flecha( 100, 100, 200, 200);
+		f2.rotar( Math.PI/8 );
+		f2.setColor( Color.MAGENTA );
+		lF.add( f2 );
 		for (Figura f : lF) {
 			f.dibujar(v);  // Polimorfismo de código
+		}
+		// Bucle de rotación
+		while (!v.estaCerrada()) {
+			v.borra();
+			for (Figura f : lF) {
+				if (f instanceof Rotable) {
+					((Rotable)f).rotar( 0.1 );
+				}
+			}
+			for (Figura f : lF) {
+				f.dibujar(v);
+			}
+			v.espera( 40 );
 		}
 	}
 	

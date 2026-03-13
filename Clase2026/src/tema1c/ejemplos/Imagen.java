@@ -2,11 +2,13 @@ package tema1c.ejemplos;
 
 import utils.ventanas.ventanaBitmap.VentanaGrafica;
 
-public class Imagen extends Figura {
+public class Imagen extends Figura implements Rotable {
 
 	// Atributos
 	private String imagen;
 	private double zoom;
+	
+	private double rotacion;
 	
 	// Consntructores
 		
@@ -44,12 +46,24 @@ public class Imagen extends Figura {
 	// métodos
 	@Override
 	public void dibujar(VentanaGrafica v) {
-		v.dibujaImagen(imagen, x, y, zoom, 0.0, 1.0f );
+		v.dibujaImagen(imagen, x, y, zoom, rotacion, 1.0f );
 	}
 
 	@Override
 	public String toString() {
 		return "Imagen " + super.toString();
 	}
+
+	@Override
+	public void rotar(double anguloRadianes) {
+		rotacion += anguloRadianes;
+	}
+
+	@Override
+	public double getRotacion() {
+		return rotacion;
+	}
+
+	
 	
 }

@@ -12,6 +12,7 @@ public class ImagenEscalada extends Imagen {
 		super(xCentro, yCentro, imagen, 0.0);
 		this.ancho = ancho;
 		this.alto = alto;
+		setZoom( 1.0 );
 	}
 	
 	// Constructor indirecto
