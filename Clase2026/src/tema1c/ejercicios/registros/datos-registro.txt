@@ -1,0 +1,39 @@
+PrecioElectricidad	18/03/2022 16:00	0.310
+PrecioElectricidad	17/03/2022 05:00	0.245
+PrecioElectricidad	17/03/2022 20:00	0.464
+PrecioElectricidad	16/03/2022 23:00	0.274
+PrecioElectricidad	16/03/2022 20:00	0.439
+PrecioElectricidad	15/03/2022 01:00	0.277
+PrecioElectricidad	15/03/2022 20:00	0.480
+PrecioCarburante	18/03/2022 12:00	Repsol	GASOLEO_A	1.733
+PrecioCarburante	18/03/2022 12:00	Repsol	GASOLINA_95	1.757
+PrecioCarburante	18/03/2022 12:00	Repsol	GASOLINA_98	1.884
+PrecioCarburante	18/03/2022 12:00	Cepsa	GASOLEO_A	1.706
+PrecioCarburante	18/03/2022 12:00	Cepsa	GASOLINA_95	1.734
+PrecioCarburante	18/03/2022 12:00	Cepsa	GASOLINA_98	1.831
+PrecioCarburante	18/03/2022 12:00	Shell	GASOLEO_A	1.659
+PrecioCarburante	18/03/2022 12:00	Shell	GASOLINA_95	1.695
+PrecioCarburante	18/03/2022 12:00	Shell	GASOLINA_98	1.818
+PrecioCarburante	17/03/2022 12:00	Repsol	GASOLEO_A	1.723
+PrecioCarburante	17/03/2022 12:00	Repsol	GASOLINA_95	1.765
+PrecioCarburante	17/03/2022 12:00	Repsol	GASOLINA_98	1.894
+PrecioCarburante	17/03/2022 12:00	Cepsa	GASOLEO_A	1.696
+PrecioCarburante	17/03/2022 12:00	Cepsa	GASOLINA_95	1.742
+PrecioCarburante	17/03/2022 12:00	Cepsa	GASOLINA_98	1.841
+PrecioCarburante	17/03/2022 12:00	Shell	GASOLEO_A	1.650
+PrecioCarburante	17/03/2022 12:00	Shell	GASOLINA_95	1.703
+PrecioCarburante	17/03/2022 12:00	Shell	GASOLINA_98	1.828
+DuracionSesion	18/03/2022 12:10	andoni	25500
+DuracionSesion	17/03/2022 09:30	andoni	18500
+DuracionSesion	15/03/2022 18:15	andoni	123000
+DuracionSesion	13/03/2022 11:24	andoni	48250
+DuracionSesion	18/03/2022 11:59	elena	37800
+DuracionSesion	17/03/2022 10:03	elena	15000
+DuracionSesion	16/03/2022 11:07	elena	518000
+DuracionSesion	14/03/2022 10:32	elena	93500
+Consulta	18/03/2022 12:00	andoni	Consulta de operaciones	9	92500
+Consulta	18/03/2022 12:00	elena	Queja de servicio	2	62500
+Consulta	17/03/2022 12:00	jaime	Consulta de operaciones	7	45500
+Consulta	17/03/2022 12:00	itziar	Consulta de operaciones	10	51000
+Consulta	15/03/2022 12:00	lucas	Queja de servicio	3	132000
+Consulta	14/03/2022 12:00	janire	Consulta de operaciones	5	89300
