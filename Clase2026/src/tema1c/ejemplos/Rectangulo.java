@@ -4,12 +4,12 @@ import java.awt.Color;
 
 import utils.ventanas.ventanaBitmap.VentanaGrafica;
 
-public class Rectangulo extends Figura {
-//	private int x;
+public class Rectangulo extends Figura implements Coloreable, Movible {
+//	private int x;  // Estos atributos se heredan
 //	private int y;
+//	private Color color;
 	private int anchura;
 	private int altura;
-//	private Color color;
 	private float grosor;
 	
 	/** Crea un rectángulo ortogonal (alineado con los ejes)
@@ -27,6 +27,7 @@ public class Rectangulo extends Figura {
 		this.grosor = grosor;
 	}
 
+// Estos métodos se heredan
 //	public int getX() {
 //		return x;
 //	}
@@ -80,9 +81,60 @@ public class Rectangulo extends Figura {
 	 */
 	@Override
 	public void dibujar( VentanaGrafica v ) {
-		v.dibujaRect( x-anchura/2, y-altura/2, anchura, altura, grosor, color );
+		// v.dibujaRect( x-anchura/2, y-altura/2, anchura, altura, grosor, color );
+		// Cambio de dibujado con interfaz Coloreable
+		v.dibujaRect( x-anchura/2, y-altura/2, anchura, altura, grosor, color, colorFondo );
 	}
 	
-	// TODO Pendiente definir toString y equals
+	@Override
+	public String toString() {
+		return "Rectángulo " + super.toString() + " - " + anchura + "," + altura;
+	}
+
+	@Override
+	public boolean equals(Object obj) {
+		if (obj==null) {
+			return false;
+		} else if (obj instanceof Rectangulo) {
+			Rectangulo r2 = (Rectangulo) obj;
+			return x==r2.x && y==r2.y && anchura==r2.anchura && altura==r2.altura;
+		} else {
+			return false;
+		}
+	}
+
+
+	// INTERFAZ COLOREABLE
+
+	Color colorFondo = Color.WHITE;
+	
+	@Override
+	public Color getColorFondo() {
+		return colorFondo;
+	}
+
+	@Override
+	public void setColorFondo(Color color) {
+		this.colorFondo = color;
+	}
+
+	
+	// INTERFAZ MOVIBLE
+	
+	// Los rectángulos tienen que poderse mover un píxel en cada nuevo movimiento en una dirección aleatoria
+	
+	@Override
+	public void mover(long tiempoMilis) {
+		double aleatorio = Math.random();   // entre 0.0 y 1.0
+		if (aleatorio <= 0.25) {
+			setX( getX()-1 );
+		} else if (aleatorio <= 0.5) {
+			setX( getX()+1 );
+		} else if (aleatorio <= 0.75) {
+			setY( getY()-1 );
+		} else {
+			setY( getY()+1 );
+		}
+	}
 	
 }

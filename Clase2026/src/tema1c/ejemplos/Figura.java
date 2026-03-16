@@ -15,8 +15,8 @@ public abstract class Figura {
 	 */
 	public Figura(int x, int y) {
 		super();
-		this.x = x;
-		this.y = y;
+		setX( x );
+		setY( y );
 		this.color = Color.BLACK;
 	}
 	public Figura(int x, int y, Color color) {
