@@ -7,6 +7,8 @@ import java.awt.Point;
 import java.util.ArrayList;
 import java.util.List;
 
+// TODO Completar implementación, quedan funcionalidades a medio hacer/probar
+
 /**
  * Partida de ajedrez interactiva en tiempo real con tablero completo,
  * zona lateral con elementos especiales y soporte de interfaces.
