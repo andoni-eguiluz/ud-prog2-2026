@@ -1,6 +1,7 @@
 package tema1c.ejemplos;
 
 import java.awt.Color;
+import java.awt.Point;
 
 import utils.ventanas.ventanaBitmap.VentanaGrafica;
 
@@ -8,59 +9,61 @@ public class Hexagono extends Figura implements Coloreable, Clicable, Movible, R
 
 	// heredamos x, y, color
 	private double radio; // círculo inscribe a hexágono por sus vértices (dist de centro a vértice)
-	
+
+	// Atributos añadidos por comportamientos de interfaces
+	private double rotacion;
+	private Color colorRelleno;
+
 	public Hexagono(int x, int y, Color color, double radio) {
 		super(x, y, color);
 		this.radio = radio;
 	}
 
-	@Override
-	public void rotar(double anguloRadianes) {
-		// TODO Auto-generated method stub
-		
-	}
+	// Interfaces
 
 	@Override
-	public double getRotacion() {
-		// TODO Auto-generated method stub
-		return 0;
-	}
-
-	@Override
-	public void mover(long tiempoMilis) {
-		// TODO Auto-generated method stub
-		
+	public void dibujar(VentanaGrafica v) {
+		v.dibujaCirculo( x, y, radio-10, 0f, colorRelleno, colorRelleno );
+		v.dibujaPoligonoRegular( x, y, 6, radio, rotacion, 3.5f, color );
 	}
 
 	@Override
 	public boolean contieneCoordenada(int x, int y) {
-		// TODO Auto-generated method stub
-		return false;
+		Point p1 = new Point( x, y );
+		Point p2 = new Point( this.x, this.y );
+		return p1.distance(p2) <= radio;
 	}
 
 	@Override
 	public void reaccionaAClick() {
-		// TODO Auto-generated method stub
-		
+		color = new Color( (float) Math.random(), (float) Math.random(), (float) Math.random() );  // Color aleatorio
+	}
+
+	@Override
+	public void rotar(double anguloRadianes) {
+		rotacion += anguloRadianes;
+	}
+
+	@Override
+	public double getRotacion() {
+		return rotacion;
+	}
+
+	@Override
+	public void mover(long tiempoMilis) {
+		x += 1;
 	}
 
 	@Override
 	public Color getColorFondo() {
-		// TODO Auto-generated method stub
-		return null;
+		return colorRelleno;
 	}
 
 	@Override
 	public void setColorFondo(Color color) {
-		// TODO Auto-generated method stub
-		
+		this.colorRelleno = color;
 	}
 
-	@Override
-	public void dibujar(VentanaGrafica v) {
-		// TODO Auto-generated method stub
-		
-	}
-
+	
 	
 }

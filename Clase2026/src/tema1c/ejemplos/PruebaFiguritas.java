@@ -30,6 +30,7 @@ public class PruebaFiguritas {
 		f2.rotar( Math.PI/8 );
 		f2.setColor( Color.MAGENTA );
 		lF.add( f2 );
+		lF.add( new Hexagono( 50, 300, Color.MAGENTA, 60 ) );
 		for (Figura f : lF) {
 			f.dibujar(v);  // Polimorfismo de código
 		}
