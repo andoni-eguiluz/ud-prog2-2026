@@ -1,0 +1,117 @@
+Clase Objetodle - puntos en los que hay cambioss debido a los interfaces (ejercicio 2b.6)
+
+Interface Animable:
+	public void run() {
+		...
+		while (!estaCerrada() && !finExito && !finFracaso ) {
+			boolean hayInput = input();
+			if (hayInput) {  // Si hay input hay que redibujar el tablero
+				dibujaTablero();
+			} else {  // Si no hay input redibujar solo los objetos animables
+				dibujaAnimacion();
+			}
+			espera(50);
+		}
+	}
+	...	
+	private void dibujaAnimacion() {
+		// Dibujo de animaciones de intentos ya hechos
+		for (Combi combi : intentosHechos) {
+			for (Elemento el : combi.getCombinacion()) {
+				if (el instanceof Animable) {
+					((Animable)el).dibuja();
+				}
+			}
+		}
+	}
+
+Interface SensibleAlRaton:
+	// Mouseover - atributos
+	private SensibleAlRaton teclaConMouseOver;
+	...
+	private boolean input() {
+		...
+		// Proceso de mouse over
+		Point mouse = getRatonMovido();
+		if (mouse!=null) {
+			for (Elemento tecla : teclado) {
+				if (tecla instanceof SensibleAlRaton) {
+					SensibleAlRaton teclaSensible = (SensibleAlRaton) tecla;
+					if (teclaSensible.estaPuntoDentro( mouse )) {
+						teclaConMouseOver = teclaSensible;
+						hayInput = true;
+						break;
+					}
+				}
+			}
+		}
+		return hayInput;
+	}
+	...
+	private void dibujoTeclado() {
+		...
+		} while (!lTeclas.isEmpty());
+		// Mouse over
+		if (teclaConMouseOver != null) {
+			teclaConMouseOver.dibujaInverso();
+		}
+	}
+	
+Interface TeclaEspecial:
+	// Teclado diferenciado de opciones - atributos
+	private ArrayList<Elemento> teclado;
+	...
+	public Objetodle(int anchura, int altura, String titulo, Opciones opciones, int numElementos, int numIntentos ) {
+		...
+		xTablero = (getAnchura() - (numElementos-1)*pixelsMargen - numElementos*tamElemento) / 2;
+		// Teclado y teclas especiales
+		teclado = new ArrayList<>( opciones.getOpciones() );
+		teclado.add( new TeclaBackspace() );
+	}
+	...
+	private boolean input() {
+		...
+			for (Elemento tecla : teclado) {  // en vez de opciones.getOpciones()
+		...
+			for (Elemento tecla : teclado) {  // en vez de opciones.getOpciones()
+		...
+			for (Elemento tecla : teclado) {  // en vez de opciones.getOpciones()
+		...
+	}
+	...
+	private void procesaTecla( Elemento tecla ) {
+		if (tecla instanceof TeclaEspecial) {
+			((TeclaEspecial)tecla).procesaTecla( this );
+		} else {
+			... resto
+	...
+	private void dibujaTablero() {
+		// Dibujo de teclado
+		dibujoTeclado();
+		...
+	
+	private void dibujoTeclado() {
+		dibujaLinea( 0, yTeclado, getAnchura(), yTeclado, 2f, Color.BLACK );
+		int yLinea = yTeclado + pixelsMargen;
+		ArrayList<Elemento> lTeclas = new ArrayList<Elemento>( teclado );  // en vez de opciones.getOpciones()
+		do {
+			int numTeclasPorFila = getAnchura() / (tamTecla + pixelsMargen);
+			if (numTeclasPorFila > lTeclas.size()) {
+				numTeclasPorFila = lTeclas.size();
+			}
+			int xLinea = (getAnchura() - (numTeclasPorFila * (tamTecla + pixelsMargen))) / 2;
+			for (int i=0; i<numTeclasPorFila; i++) {
+				Elemento e = lTeclas.remove(0);
+				e.setObjetodle( this );
+				e.setPosi( xLinea, yLinea );
+				e.setTam( tamTecla );
+				e.dibuja();
+				xLinea = xLinea + (tamTecla + pixelsMargen);
+			}
+			yLinea += (tamTecla + pixelsMargen);
+		} while (!lTeclas.isEmpty());
+		// Mouse over
+		if (teclaConMouseOver != null) {
+			teclaConMouseOver.dibujaInverso();
+		}
+		
