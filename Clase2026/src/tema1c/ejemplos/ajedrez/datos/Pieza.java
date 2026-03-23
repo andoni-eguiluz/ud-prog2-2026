@@ -15,7 +15,9 @@ import java.awt.Point; // INTERFACES
  *                           Al terminar el movimiento deben coincidir con getX()/getY().
  */
 public abstract class Pieza extends ElementoVisual
-        implements Seleccionable, Movible { // INTERFACES
+        implements Seleccionable, Movible
+        , Comparable<Pieza>
+        { // INTERFACES
 
     // -------------------------------------------------------------------------
     // Atributos privados
@@ -207,6 +209,28 @@ public abstract class Pieza extends ElementoVisual
         result = 31 * result + columna;
         result = 31 * result + (color != null ? color.hashCode() : 0);
         return result;
+    }
+    
+    @Override
+    public int compareTo(Pieza o) {
+    	// int comp = fila - o.fila;
+    	// if (comp==0) {
+    	//     comp = columna - o.columna;
+    	// {
+    	// return comp;
+    	if (fila < o.fila) {
+    		return -1;
+    	} else if (fila > o.fila) {
+    		return +1;
+    	} else {
+    		if (columna < o.columna) {
+    			return -1;
+    		} else if (columna < o.columna) {
+    			return +1;
+    		} else {
+    			return 0;
+    		}
+    	}
     }
 
 }
