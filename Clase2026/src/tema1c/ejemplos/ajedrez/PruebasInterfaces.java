@@ -32,7 +32,7 @@ public class PruebasInterfaces {
 		lPiezas.add( new Caballo( 4, 2, Color.BLANCA, tab ) );
 		lPiezas.add( new Dama( 3, 5, Color.BLANCA, tab ) );
 		lPiezas.add( new Rey( 7, 1, Color.BLANCA, tab ) );
-		lPiezas.add( 5 );
+		// lPiezas.add( 5 );  Si añadiéramos un Integer, no se puede ordenar con Pieza  (Pieza no es comparable con Integer)
 		System.out.println( lPiezas );
 		lPiezas.sort( null );
 		System.out.println( lPiezas );
