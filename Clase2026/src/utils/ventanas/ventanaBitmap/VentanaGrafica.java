@@ -11,6 +11,7 @@ import java.net.URL;
 import java.util.*;
 
 /** Clase ventana sencilla para dibujado directo a la ventana
+ * v 1.2.6 - Añadida función de dibujado parcial de imagen (para spritesheets)
  * v 1.2.5 - Añadidas funciones de lectura múltiple (pideTextoMultiple, pideCheckBoxMultiple, esperaEntradaMultiple, leeIntMultiple, leeDoubleMultiple, leeCheckBoxMultiple, leeStringMultiple)
  * v 1.2.4 - Añadido dibujaRect con rotación
  * v 1.2.3 - Añadido dibujado de flecha con ángulo
