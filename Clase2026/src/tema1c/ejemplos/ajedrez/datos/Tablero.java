@@ -2,12 +2,13 @@ package tema1c.ejemplos.ajedrez.datos;
 
 import utils.ventanas.ventanaBitmap.VentanaGrafica;
 import java.util.ArrayList;
+import java.util.Iterator;
 
 /**
  * Representa el tablero de ajedrez.
  * Gestiona la colección de piezas y se encarga de dibujarse a sí mismo.
  */
-public class Tablero extends ElementoVisual {
+public class Tablero extends ElementoVisual implements Iterable<Pieza> {
 
     /** Número de filas y columnas estándar de un tablero de ajedrez. */
     public static final int FILAS    = 8;
@@ -223,4 +224,34 @@ public class Tablero extends ElementoVisual {
         result = 31 * result + yInicio;
         return result;
     }
+    
+    
+    // Interfaz Iterable
+    
+	@Override
+	public Iterator<Pieza> iterator() {
+		return new TableroIterator();
+	}
+
+
+	// ---------- CLASE INTERNA ------------
+	// Clase local - interna - se asocia a la clase externa 
+	// por eso puede acceder a la instancia (this) de tablero --> para accceder a las piezas
+	// Podría ser externa, pero en ese caso necesitaría tener también el atributo de piezas 
+	// para poder iterar sobre ellas
+	
+	private class TableroIterator implements Iterator<Pieza> {
+		int pos = 0;
+		@Override
+		public boolean hasNext() {
+			return pos<piezas.size();
+		}
+		@Override
+		public Pieza next() {
+			Pieza ret = piezas.get(pos);
+			pos++;
+			return ret;
+		}
+	}    
+    
 }

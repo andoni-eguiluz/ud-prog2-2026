@@ -3,6 +3,7 @@ package tema1c.ejemplos.ajedrez.datos;
 import utils.ventanas.ventanaBitmap.VentanaGrafica;
 import java.awt.Color;
 import java.awt.Font;
+import java.io.Serializable;
 
 /**
  * Reloj analógico que se dibuja en la zona lateral de la ventana.
@@ -24,7 +25,7 @@ public class Reloj extends ElementoVisual implements Animable { // INTERFACES
     // Estado del reloj
     // -------------------------------------------------------------------------
 
-    /** Segundos totales acumulados desde el inicio de la partida. */
+	/** Segundos totales acumulados desde el inicio de la partida. */
     private double segundosTotales = 0.0;
 
     // -------------------------------------------------------------------------

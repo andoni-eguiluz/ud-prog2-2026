@@ -1,5 +1,7 @@
 package tema1c.ejemplos.ajedrez.datos;
 
+import java.io.Serializable;
+
 import utils.ventanas.ventanaBitmap.VentanaGrafica;
 
 /**
@@ -7,15 +9,15 @@ import utils.ventanas.ventanaBitmap.VentanaGrafica;
  * Representa cualquier elemento que puede dibujarse en una VentanaGrafica.
  */
 public abstract class ElementoVisual {
-
-    // Coordenadas del centro de la figura (en píxeles)
+	
+	// Coordenadas del centro de la figura (en píxeles)
     private int x;
     private int y;
     // Dimensiones de la figura (en píxeles)
     private int ancho;
     private int alto;
     // Ventana en la que se dibuja el elemento
-    private VentanaGrafica ventana;
+    private transient VentanaGrafica ventana;
 
     // -------------------------------------------------------------------------
     // Constructores
