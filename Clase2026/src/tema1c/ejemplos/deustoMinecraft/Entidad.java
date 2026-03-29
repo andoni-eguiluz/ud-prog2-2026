@@ -1,6 +1,6 @@
 package tema1c.ejemplos.deustoMinecraft;
 
-public class Entidad {
+public abstract class Entidad {
 	protected int id;
 	protected String nombre;
 	protected int x;
