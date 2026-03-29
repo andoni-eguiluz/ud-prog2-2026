@@ -39,5 +39,6 @@ public class PruebasInterfaces {
 		for (Pieza p : tab.getPiezas()) {   // TODO: for (Pieza p : tab)
 			System.out.println( p );
 		}
+		v.acaba();
 	}
 }
