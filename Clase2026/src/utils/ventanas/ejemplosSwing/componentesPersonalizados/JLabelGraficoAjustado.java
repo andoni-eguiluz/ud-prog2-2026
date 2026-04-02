@@ -1,4 +1,4 @@
-package utils.ventanas.ejemplosSwing;
+package utils.ventanas.ejemplosSwing.componentesPersonalizados;
 
 import java.awt.*;
 import java.awt.image.BufferedImage;
