@@ -2,9 +2,19 @@ package tema3.ejemplos;
 
 import java.util.*;
 
-public class RepasoMapas {
+public class ConceptoConjuntosYMapas {
 	
     public static void main(String[] args) {
+    	// Conjunto: una lista de valores ÚNICOS (no puede haber valores "equals" dentro del conjunto)
+    	// Métodos:
+    	//    conj.add( v )
+    	//    conj.contains( v )
+    	//    conj.remove( v )
+    	
+    	// Dos tipos de conjuntos: Hash y Tree
+    	//    Hash - muy rápido (K) / sin orden. Necesita equals() y hashCode() definidos y consistentes  [equals true ==> hashCode igual]
+    	//    Tree - rápido (log n) / con orden [natural], necesita Comparable<T> consistente.
+    	
         // Mapa: como el arraylist pero con clave en lugar de índice
         // arraylist l --> l.get(2)
         // mapa m --> m.get(clave) --> null si la clave no existe en ese mapa, valor si existe

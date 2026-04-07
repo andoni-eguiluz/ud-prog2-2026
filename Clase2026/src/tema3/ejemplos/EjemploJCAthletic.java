@@ -50,7 +50,7 @@ public class EjemploJCAthletic {
 	
 	private static void pruebaJCStrings() {
 		goleadores = cargaGoleadores();
-		System.out.println( goleadores );
+		System.out.println( "ArrayList: " + goleadores );
 		
 		// Linkedlist
 		LinkedList<String> lista2 = new LinkedList<>();
@@ -58,49 +58,55 @@ public class EjemploJCAthletic {
 			lista2.add( jugador );
 		}
 		if (lista2.contains( "Sancet" )) {
-			System.out.println( "Sancet está en la lista" );
+			System.out.println( " Sancet está en la lista" );
 		}
-		System.out.println( lista2 );
+		System.out.println( "LinkedList: " + lista2 );
 
 		// Sets
 		HashSet<String> conjuntoHash = new HashSet<String>();
 		for (String jugador : goleadores) {
 			conjuntoHash.add( jugador );
 		}
-		System.out.println( conjuntoHash );
+		System.out.println( "HashSet: " + conjuntoHash );
+		System.out.println( "\nRecorriendo un hashset:" );
 		for (String j : conjuntoHash) {
 			System.out.println( "  " + j );
 		}
 		if (conjuntoHash.contains( "Sancet" )) {
-			System.out.println( "Sancet está en el conjunto" );
+			System.out.println( " Sancet está en el conjunto hash" );
 		}
 		
 		TreeSet<String> conjuntoTree = new TreeSet<>();
 		for (String jugador : goleadores) {
 			conjuntoTree.add( jugador );
-			System.out.println( "  " + conjuntoTree );
 		}
 		System.out.println( conjuntoTree );
 		if (conjuntoTree.contains( "Sancet" )) {
-			System.out.println( "Sancet está en el conjunto" );
+			System.out.println( " Sancet está en el conjunto tree" );
 		}
 		
 		// Y cómo es un hash por dentro?
+		System.out.println( "\nAsí evoluciona un hashset: " );
 		HashSet<Jugador> conjJugs = new HashSet<>();
 		for (String jugador : goleadores) {
-			conjJugs.add( new Jugador(jugador) );
-			System.out.println( " * " + conjJugs );
+			Jugador j = new Jugador(jugador);
+			conjJugs.add( j );
+			System.out.println( " * " + conjJugs + " tras añadir " + j );
 		}
 		System.out.println( conjJugs );
 		
 		// Y cómo es un Tree por dentro?
+		System.out.println( "\nAsí evoluciona un treeset: " );
 		TreeSet<Jugador> conjTreeJugs = new TreeSet<>();
 		for (String jugador : goleadores) {
-			conjTreeJugs.add( new Jugador(jugador) );
-			System.out.println( " t " + conjTreeJugs );
+			Jugador j = new Jugador(jugador);
+			conjJugs.add( j );
+			conjTreeJugs.add( j );
+			System.out.println( " t " + conjTreeJugs + " tras añadir " + j );
 		}
 		
 		// Qué podríamos querer hacer con un mapa teniendo goleadores?
+		System.out.println( "\nUso de un mapa de enteros Integer para contar goleadores" );
 		HashMap<String,Integer> mapaConteoGoles = new HashMap<>();  // 1.- Inicializar el mapa
 		// 2.- Tratamiento o carga del mapa
 		for (String jugador : goleadores) {
@@ -115,7 +121,9 @@ public class EjemploJCAthletic {
 			System.out.println( mapaConteoGoles );
 		}
 		System.out.println( mapaConteoGoles );
+
 		// Reprogramado con enteros mutables
+		System.out.println( "\nUso de un mapa de enteros mutables para contar goleadores" );
 		TreeMap<String,EnteroMutable> mapaConteoGoles2 = new TreeMap<>();  // 1.- Inicializar el mapa
 		// 2.- Carga con if (existe / no existe la clave)
 		for (String jugador : goleadores) {
@@ -127,16 +135,18 @@ public class EjemploJCAthletic {
 				EnteroMutable em = mapaConteoGoles2.get(jugador);
 				em.inc1();
 			}
-			System.out.println( mapaConteoGoles );
+			System.out.println( mapaConteoGoles2 );
 		}
-		System.out.println( mapaConteoGoles );
+		System.out.println( mapaConteoGoles2 );
 		// 3.- Búsquedas -> get
 		// 4.- Recorridos -> keySet() las claves / values() los valores
+		System.out.println( "\nRecorrido del mapa de goleadores" );
 		for (String clave : mapaConteoGoles2.keySet()) {
 			System.out.println( "Jugador " + clave + " - goles " + mapaConteoGoles2.get(clave) );
 		}
 		
 		// Lista de partidos en los que se ha metido gol?
+		System.out.println( "\nUso de un mapa de listas de strings para memorizar partidos de goleadores" );
 		HashMap<String,ArrayList<String>> mapaPartidos = new HashMap<>();
 		ArrayList<String> partidos = cargaPartidos();
 		for (int i=0; i<goleadores.size(); i++) {

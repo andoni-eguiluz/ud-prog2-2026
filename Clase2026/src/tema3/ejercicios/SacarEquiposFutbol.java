@@ -12,7 +12,7 @@ public class SacarEquiposFutbol {
 	public static void main(String[] args) {
 		// Saca el código html del calendario de liga que coincide con una parte de los nombres de equipos
 		ArrayList<String> l = ProcesaURLs.buscaEnWeb( "https://www.marca.com/futbol/primera-division/calendario.html", 
-				"<img src=\"https://e00-marca.uecdn.es/assets/", 
+				"@type\":\"SportsTeam\", \"name\":", 
 				"iso-8859-15" );
 		procesa( l );
 	}
@@ -54,11 +54,11 @@ public class SacarEquiposFutbol {
 	}
 	
 	private static String sacaEquipoDeHtml( String html ) {
-		// Buscar esta parte: alt="Barcelona"/>   (o cualquier otro equipo)
-		int posi1 = html.indexOf( "alt=\"" );
-		int posi2 = html.indexOf( "\"", posi1+5 );
+		// Buscar esta parte: "name": "Betis"   (o cualquier otro equipo)
+		int posi1 = html.indexOf( "name\": \"" );
+		int posi2 = html.indexOf( "\"", posi1+8 );
 		// System.out.println( posi1 + " - " + posi2 );
-		String equipo = html.substring( posi1+5, posi2 );
+		String equipo = html.substring( posi1+8, posi2 );
 		return equipo;
 	}
 

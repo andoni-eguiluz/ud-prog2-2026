@@ -22,15 +22,16 @@ public class ProcesaURLs {
 	 * @param args	No utilizado
 	 */
 	public static void main(String[] args) {
-		// Hemos explorado la web www.marca.com (marzo de 2019) y vemos que
+		// Hemos explorado la web www.marca.com (abril de 2026) y vemos que
 		// En la página https://www.marca.com/futbol/primera-division/calendario.html
 		// está el calendario de la liga, y en él hay muchas líneas con la forma
 		// <img src="https://e00-marca.uecdn.es/assets/sports ... alt="Girona"/>
+		//  { "@type":"SportsTeam", "name": "Mallorca" }
 		// y así con todos los equipos.
 		// Y el charset es iso-8859-15   (<meta http-equiv="Content-Type" content="text/html; charset=iso-8859-15"/>)
 		// Hipótesis: buscamos todas esas líneas y encontraremos los equipos
 		ArrayList<String> lineas = ProcesaURLs.buscaEnWeb( "https://www.marca.com/futbol/primera-division/calendario.html", 
-				"<img src=\"https://e00-marca.uecdn.es/assets/", 
+				"@type\":\"SportsTeam\", \"name\":", 
 				"iso-8859-15" );
 		for (String linea : lineas) {
 			System.out.println( linea );

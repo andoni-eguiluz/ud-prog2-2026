@@ -17,11 +17,12 @@ public class RepasoEnums {
         // Se puede convertir a string
         System.out.println( ColorParchis.AMARILLO.toString() );
         // Y se puede convertir desde string
+        String colorString = "RoJO";
         try {
-            ColorParchis color3 = ColorParchis.valueOf( "RoJO" );
+            ColorParchis color3 = ColorParchis.valueOf( colorString );
             System.out.println( color3 );
         } catch (IllegalArgumentException e) {
-            System.out.println( "Conversión errónea" );
+            System.out.println( "Conversión errónea de " + colorString );
         }
         // Recorrer
         for (ColorParchis c : ColorParchis.values()) {
