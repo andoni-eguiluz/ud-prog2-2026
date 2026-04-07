@@ -11,6 +11,7 @@ import java.net.URL;
 import java.util.*;
 
 /** Clase ventana sencilla para dibujado directo a la ventana
+ * v 1.2.7 - Añadidos métodos de diálogo dentro de ventana con JOptionPane: sacaDialogoConBotones, sacaDialogoConOpciones, sacaDialogoConTextoEntrada
  * v 1.2.6 - Añadida función de dibujado parcial de imagen (para spritesheets)
  * v 1.2.5 - Añadidas funciones de lectura múltiple (pideTextoMultiple, pideCheckBoxMultiple, esperaEntradaMultiple, leeIntMultiple, leeDoubleMultiple, leeCheckBoxMultiple, leeStringMultiple)
  * v 1.2.4 - Añadido dibujaRect con rotación
@@ -1384,6 +1385,44 @@ public class VentanaGrafica {
 	 */
 	public void sacaDialogo( String titulo, String mensaje ) {
 		JOptionPane.showMessageDialog( ventana, mensaje, titulo, JOptionPane.INFORMATION_MESSAGE );
+	}
+	
+	/** Muestra un cuadro de diálogo con opciones de botón encima de la ventana y espera a que el usuario elija una opción
+	 * @param titulo	Título del diálogo
+	 * @param mensaje	Texto a mostrar de mensaje
+	 * @param botones	Texto de botones que se quieren mostrar al usuario para que elija
+	 * @return	Devuelve el texto del botón pulsado, o null si no se ha pulsado ninguno de ellos
+	 */
+	public String sacaDialogoConBotones( String titulo, String mensaje, String... botones ) {
+		if (botones.length==0) {
+			sacaDialogo( titulo, mensaje );
+			return null;
+		} else {
+			return (String) JOptionPane.showInputDialog( ventana, mensaje, titulo, JOptionPane.QUESTION_MESSAGE, null, botones, botones[0] );
+		}
+	}
+	
+	/** Muestra un cuadro de diálogo con opciones en lista vertical encima de la ventana y espera a que el usuario elija una opción
+	 * @param titulo	Título del diálogo
+	 * @param mensaje	Texto a mostrar de mensaje
+	 * @param opciones	Texto de opciones que se quieren mostrar al usuario para que elija
+	 * @return	Devuelve el texto de la opción elegida, o null si no se ha elegido ninguna de ellas
+	 */
+	public String sacaDialogoConOpciones( String titulo, String mensaje, String... opciones ) {
+		if (opciones.length==0) {
+			return null;
+		} else {
+			return (String) JOptionPane.showInputDialog( ventana, mensaje, titulo, JOptionPane.QUESTION_MESSAGE, null, opciones, opciones[0] );
+		}
+	}
+	
+	/** Muestra un cuadro de diálogo encima de la ventana y espera a que el usuario introduzca un texto
+	 * @param titulo	Título del diálogo
+	 * @param mensaje	Texto a mostrar
+	 * @return	String introducido por el usuario, null si pulsa escape o sale sin aceptar
+	 */
+	public String sacaDialogoConTextoEntrada( String titulo, String mensaje ) {
+		return JOptionPane.showInputDialog( ventana, mensaje, titulo, JOptionPane.QUESTION_MESSAGE );
 	}
 	
 	/** Muestra un cuadro de diálogo de selección de color encima de la ventana y permite al usuario seleccionar un color
