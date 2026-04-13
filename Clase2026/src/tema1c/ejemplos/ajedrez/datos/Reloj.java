@@ -19,12 +19,15 @@ import java.io.Serializable;
  *
  * Lleva la cuenta de los segundos totales de partida transcurridos.
  */
-public class Reloj extends ElementoVisual implements Animable { // INTERFACES
+public class Reloj extends ElementoVisual implements Animable, Serializable { // INTERFACES
 
+	private static final long serialVersionUID = 1L;
+	
     // -------------------------------------------------------------------------
     // Estado del reloj
     // -------------------------------------------------------------------------
 
+	
 	/** Segundos totales acumulados desde el inicio de la partida. */
     private double segundosTotales = 0.0;
 

@@ -1,5 +1,7 @@
 package tema3.ejemplos;
 
+import java.util.*;
+
 /** Clase de ejemplo de uso de Java Collections
  * @author andoni.eguiluz at ingenieria.deusto.es
  */
@@ -41,6 +43,46 @@ public class EjemploJC {
 		
 	private static void pruebasJCconStrings() {
 		// TODO
+		// ArrayList:
+		ArrayList<String> al = new ArrayList<>();
+		for (String peli : peliculasOscars2023) {
+			al.add( peli );
+		}
+		System.out.println( "AL: " + al );
+		if (al.contains( "Oppenheimer") ) {
+			System.out.println( "Oppenheimer existe en AL" );
+		}
+		
+		LinkedList<String> ll = new LinkedList<>();
+		for (String peli : peliculasOscars2023) {
+			ll.add( peli );
+		}
+		System.out.println( "LL: " + ll );
+		if (ll.contains( "Oppenheimer" ) ) {
+			System.out.println( "Oppenheimer existe en LL" );
+		}
+		
+		HashSet<String> hs = new HashSet<>();
+		for (String peli : peliculasOscars2023) {
+			hs.add( peli );
+			System.out.println( "  " + hs );
+		}
+		System.out.println( "HS: " + hs );
+		if (hs.contains( "Oppenheimer" ) ) {
+			System.out.println( "Oppenheimer existe en HS" );
+		}
+		// No hs.get(n)  !!!!
+		
+		
+		TreeSet<String> ts = new TreeSet<>();
+		for (String peli : peliculasOscars2023) {
+			ts.add( peli );
+			System.out.println( "  " + ts );
+		}
+		System.out.println( "TS: " + ts );
+		if (ts.contains( "Oppenheimer" ) ) {
+			System.out.println( "Oppenheimer existe en TS" );
+		}
 	}
 	
 	private static void pruebasJCconClasesPropias() {

@@ -88,7 +88,7 @@ public class PruebasInterfaces {
 		Reloj r2 = (Reloj) ois.readObject();  // TODO Necesita que también ElementoVisual (madre) sea serializable
 		ois.close();
 		v2.borra();
-		// r2.setVentana( v2 ); // TODO Esto hace falta porque si la ventana es transient no se recupera al leer del fichero
+		r2.setVentana( v2 ); // TODO Esto hace falta porque si la ventana es transient no se recupera al leer del fichero
 		r2.dibujar();
 		
 	}

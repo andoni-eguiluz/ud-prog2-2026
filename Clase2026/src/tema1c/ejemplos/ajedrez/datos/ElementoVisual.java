@@ -8,7 +8,7 @@ import utils.ventanas.ventanaBitmap.VentanaGrafica;
  * Clase abstracta base de la jerarquía de elementos visuales.
  * Representa cualquier elemento que puede dibujarse en una VentanaGrafica.
  */
-public abstract class ElementoVisual {
+public abstract class ElementoVisual implements Serializable {
 	
 	// Coordenadas del centro de la figura (en píxeles)
     private int x;
