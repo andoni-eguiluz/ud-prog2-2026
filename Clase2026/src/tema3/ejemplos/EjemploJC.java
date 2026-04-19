@@ -7,8 +7,8 @@ import java.util.*;
  */
 public class EjemploJC {
 	public static void main(String[] args) {
-		pruebasJCconStrings();
-		// pruebasJCconClasesPropias();
+		// pruebasJCconStrings();
+		pruebasJCconClasesPropias();
 	}
 
 	private static String[] peliculasOscars2023 = {
@@ -86,7 +86,58 @@ public class EjemploJC {
 	}
 	
 	private static void pruebasJCconClasesPropias() {
-		// TODO
+		HashSet<Pelicula> hs = new HashSet<>();
+		for (String peli : peliculasOscars2023) {
+			hs.add( new Pelicula( peli, 2023 ) );
+			System.out.println( "  " + hs );
+		}
+		System.out.println( "HS: " + hs );
+		if (hs.contains( new Pelicula( "Oppenheimer", 2023) ) ) {
+			System.out.println( "Oppenheimer existe en HS" );
+		}
+		
+		TreeSet<Pelicula> ts = new TreeSet<>();
+		for (String peli : peliculasOscars2023) {
+			ts.add( new Pelicula( peli, 2023 ) );
+			System.out.println( "  " + ts );
+		}
+		System.out.println( "TS: " + ts );
+		if (ts.contains( new Pelicula( "Oppenheimer", 2023) ) ) {
+			System.out.println( "Oppenheimer existe en TS" );
+		}
+		
+		// Mapas
+		
+		// Contador de oscars
+		// Clave: nombre de peli (String) >> Valor: Integer (contador)
+		// (Podría ser peli la clave porque la tenemos preparada)
+		
+		// 1. Crear el mapa
+		HashMap<String,Integer> contadoresPelis = new HashMap<>();
+		
+		// 2. Alimentar el mapa
+		for (String peli : peliculasOscars2023) {
+			// Existe o no la clave?
+			if (!contadoresPelis.containsKey( peli )) {
+				// La primera vez que llega una clave
+				contadoresPelis.put( peli, new Integer(1) );
+			} else {
+				// Las segundas, terceras, enésimas... veces que entra la clave
+				// contadoresPelis.get( peli ).inc();  // No es MUTABLE el Integer
+				int contador = contadoresPelis.get(peli);
+				contador++;
+				contadoresPelis.remove(peli);
+				contadoresPelis.put(peli, contador);
+			}
+		}
+		
+		// 3. Uso o recorrido del mapa
+		for (String nombre : contadoresPelis.keySet()) {
+			int contador = contadoresPelis.get(nombre);
+			System.out.println( nombre + " --> " + contador );
+		}
+		
+		
 	}
 	
 }
