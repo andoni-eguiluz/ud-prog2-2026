@@ -12,9 +12,9 @@ import java.util.List;
 
 public class PruebaFicherosTexto {
 
-	private static ArrayList<Empleado> listaEmpleados = new ArrayList();
-	private static ArrayList<Cliente> listaClientes = new ArrayList();
-	private static ArrayList<Persona> listaPersonas = new ArrayList();
+	private static ArrayList<Empleado> listaEmpleados = new ArrayList<>();
+	private static ArrayList<Cliente> listaClientes = new ArrayList<>();
+	private static ArrayList<Persona> listaPersonas = new ArrayList<>();
 	
 	public static void main(String[] args) {
 		crearDatosDePrueba( listaEmpleados, listaClientes );
