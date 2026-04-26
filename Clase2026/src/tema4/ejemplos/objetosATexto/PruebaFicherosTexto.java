@@ -42,6 +42,8 @@ public class PruebaFicherosTexto {
 		// TODO 6d - Soluciónalo
 		// TODO 7 - Carga la lista de personas del fichero de texto y comprueba que se ha cargado bien 
 		//          con métodos constructores crearDesde( String[] ) en cada clase ¿qué errores pueden ocurrir?
+		// TODO 8 - Y si hubiera composición, por ejemplo si Persona incluyera una lista de Reuniones a las que ha asistido?  (hay muchas personas en cada reunión)
+		//          (Imaginemos una clase Reunion que tiene id, fecha, tema, duración, resumen, lista de personas participantes)
 	}
 
 	public static void crearDatosDePrueba(List<Empleado> empleados, List<Cliente> clientes) {
