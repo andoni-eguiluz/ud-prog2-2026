@@ -48,19 +48,19 @@ public class PruebaFicherosTexto {
 
 	public static void crearDatosDePrueba(List<Empleado> empleados, List<Cliente> clientes) {
 		// EMPLEADOS
-		empleados.add(new Empleado(12345678, 'Z', "Ana", "López", "Gerente", 1983));
-		empleados.add(new Empleado(56789012, 'L', "Elena", "Martín", "RRHH", 1997));
-		empleados.add(new Empleado(23456789, 'D', "Luis Alejandro", "Pérez", "Analista", 1988));
-		empleados.add(new Empleado(45678901, 'S', "Carlos", "Ruiz", "Tester", 2005));
-		empleados.add(new Empleado(67890123, 'B', "Javier", "Sánchez", "Soporte", 2002));
-		empleados.add(new Empleado(34567890, 'V', "Marta", "García", "Programador", 1999));
+		empleados.add(new Empleado(12345678, 'Z', "Ana", "López", 1983, "Gerente"));
+		empleados.add(new Empleado(56789012, 'B', "Elena", "Martín", 1997, "RRHH"));  
+		empleados.add(new Empleado(23456789, 'D', "Luis Alejandro", "Pérez", 1988, "Analista"));
+		empleados.add(new Empleado(45678901, 'G', "Carlos", "Ruiz", 2005, "Tester")); 
+		empleados.add(new Empleado(67890123, 'B', "Javier", "Sánchez", 2002, "Soporte"));
+		empleados.add(new Empleado(34567890, 'V', "Marta", "García", 1999, "Programador"));
 		// CLIENTES
-		clientes.add(new Cliente(66666666, 'Q', "Cliente", "Seis", 6, 430.20, 1993));
-		clientes.add(new Cliente(11111111, 'H', "Cliente", "Uno", 1, 1200.50, 1991));
-		clientes.add(new Cliente(55555555, 'K', "Cliente", "Cinco", 5, 0.0, 1977));
-		clientes.add(new Cliente(22222222, 'J', "Cliente", "Dos", 2, 350.75, 1983));
-		clientes.add(new Cliente(33333333, 'P', "Cliente", "Tres", 3, -50.00, 1968));
-		clientes.add(new Cliente(44444444, 'A', "Cliente", "Cuatro", 4, 9999.99, 2001));
+		clientes.add(new Cliente(66666666, 'Q', "Cliente", "Seis", 1993, 6, 430.20));
+		clientes.add(new Cliente(11111111, 'H', "Cliente", "Uno", 1991, 1, 1200.50));
+		clientes.add(new Cliente(55555555, 'K', "Cliente", "Cinco", 1977, 5, 0.0));
+		clientes.add(new Cliente(22222222, 'J', "Cliente", "Dos", 1983, 2, 350.75));
+		clientes.add(new Cliente(33333333, 'P', "Cliente", "Tres", 1968, 3, -50.00));
+		clientes.add(new Cliente(44444444, 'A', "Cliente", "Cuatro", 2001, 4, 9999.99));
 	}	
 	
 }
