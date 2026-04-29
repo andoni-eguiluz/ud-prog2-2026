@@ -1,8 +1,10 @@
 package tema4.ejemplos;
 
+import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.PrintStream;
 import java.util.ArrayList;
+import java.util.Scanner;
 
 import javax.swing.JOptionPane;
 
@@ -10,7 +12,35 @@ public class ConceptoExcepciones {
 
 	public static void main(String[] args) {
 		// implicitas();	
-		explicitasGuardarFic();
+		// explicitasGuardarFic();
+		explicitasLeerFic();
+	}
+	
+	private static void explicitasLeerFic() {
+		ArrayList<Integer> l = new ArrayList<>();
+		try {
+			int numLinea = 0;
+			Scanner sc = new Scanner( new FileInputStream( "numeros.txt") );
+			while (sc.hasNextLine()) {
+				String linea = sc.nextLine();
+				numLinea++;
+				try {
+					int dato = Integer.parseInt( linea );
+					// Si los enteros negativos fueran incorrectos...
+					if (dato<0) {
+						throw new NumberFormatException( "Error: número negativo" );
+					}
+					l.add( dato );
+				} catch (NumberFormatException e) {
+					// Nada
+					// Informar
+					System.err.println( "Error en línea " + numLinea + " incorrecta: " + linea);
+				}
+			}
+		} catch (FileNotFoundException e) {
+			e.printStackTrace();
+		}
+		JOptionPane.showMessageDialog( null, "Lista = " + l.toString() );
 	}
 	
 	private static void explicitasGuardarFic() {
@@ -78,7 +108,12 @@ public class ConceptoExcepciones {
 	}
 	
 	
-	private static int pedirNumero( String mens ) {
+	/** Pide un número por teclado de forma interactiva al usuario
+	 * @param mens	Mensaje que muestra
+	 * @return	Número entero válido leído
+	 * @throws NumberFormatException	Se lanza si lo leído no es un entero válido
+	 */
+	private static int pedirNumero( String mens ) throws NumberFormatException {
 		String resp = JOptionPane.showInputDialog( mens );
 		return Integer.parseInt( resp );
 	}
