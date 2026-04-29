@@ -49,9 +49,9 @@ public class PruebaFicherosTexto {
 	public static void crearDatosDePrueba(List<Empleado> empleados, List<Cliente> clientes) {
 		// EMPLEADOS
 		empleados.add(new Empleado(12345678, 'Z', "Ana", "López", 1983, "Gerente"));
-		empleados.add(new Empleado(56789012, 'B', "Elena", "Martín", 1997, "RRHH"));  
+		empleados.add(new Empleado(56789012, 'L', "Elena", "Martín", 1997, "RRHH"));  
 		empleados.add(new Empleado(23456789, 'D', "Luis Alejandro", "Pérez", 1988, "Analista"));
-		empleados.add(new Empleado(45678901, 'G', "Carlos", "Ruiz", 2005, "Tester")); 
+		empleados.add(new Empleado(45678901, 'S', "Carlos", "Ruiz", 2005, "Tester")); 
 		empleados.add(new Empleado(67890123, 'B', "Javier", "Sánchez", 2002, "Soporte"));
 		empleados.add(new Empleado(34567890, 'V', "Marta", "García", 1999, "Programador"));
 		// CLIENTES

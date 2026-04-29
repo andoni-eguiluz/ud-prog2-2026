@@ -1,0 +1,139 @@
+package tema4.ejemplos.objetosATexto.solucion;
+
+import java.io.FileInputStream;
+import java.io.FileNotFoundException;
+import java.io.PrintStream;
+import java.util.ArrayList;
+import java.util.Comparator;
+import java.util.List;
+import java.util.Scanner;
+
+// TAREAS!!!
+// TODO 1 - Solucionar error de compilación
+// TODO 2 - Solucionar excepción de letra de DNI
+
+public class PruebaFicherosTexto {
+
+	private static ArrayList<Empleado> listaEmpleados = new ArrayList<>();
+	private static ArrayList<Cliente> listaClientes = new ArrayList<>();
+	private static ArrayList<Persona> listaPersonas = new ArrayList<>();
+
+	public static void main(String[] args) {
+		crearDatosDePrueba( listaEmpleados, listaClientes );
+		listaPersonas.addAll( listaEmpleados ); 
+		listaPersonas.addAll( listaClientes ); 
+		listaPersonas.sort( new Comparator<Persona>() {
+			@Override
+			public int compare(Persona o1, Persona o2) {
+				return o1.getDNI() - o2.getDNI();
+			}
+		} );
+		System.out.println( "Empleados: " + listaEmpleados ); 
+		System.out.println( "Clientes: " + listaClientes ); 
+		System.out.println( "Todos:         " + listaPersonas ); 
+		// TODO 3 - Guardar a fichero de texto la lista de empleados con toString
+		try {
+			PrintStream ps = new PrintStream( "empleados-1.txt" );
+			for (Empleado e : listaEmpleados) {
+				ps.println( e );
+			}
+			ps.close();
+		} catch (FileNotFoundException e) {
+			System.err.println( "Error: fichero no encontrado" );
+		}
+		// TODO 3b - Mirar fichero de empleados. ¿Sería posible leerlo correctamente?
+		// No. Porque no está el dato de año, y por el espacio de los nombres y apellidos
+		// TODO 3c - Por qué entonces no es una buena práctica usar toString?
+		// Porque no está orientado a que sea reconstruible *todo* el objeto, ni que sea *fácil* reconstruirlo
+		// TODO 4 - Guardar a fichero de texto la lista de empleados con un método especializado aLinea() en una línea de texto
+		try {
+			PrintStream ps = new PrintStream( "empleados.txt" );
+			for (Empleado e : listaEmpleados) {
+				ps.println( e.aLinea() );
+				// TODO 4b - ¿Qué separador debemos usar para que pueda haber una lectura posterior viable?
+				// Tabulador puede estar bien
+				// TODO 4c - ¿En qué casos no funcionaría bien la lectura posterior?
+				// Si hubiera tabuladores dentro de los strings
+			}
+			ps.close();
+		} catch (FileNotFoundException e) {
+			System.err.println( "Error: fichero no encontrado" );
+		}
+		// TODO 5 - Guardar con el mismo criterio la lista de clientes
+		try {
+			PrintStream ps = new PrintStream( "clientes.txt" );
+			for (Cliente c : listaClientes) {
+				ps.println( c.aLinea() );
+			}
+			ps.close();
+		} catch (FileNotFoundException e) {
+			System.err.println( "Error: fichero no encontrado" );
+		}
+		// TODO 6 - Guardar con el mismo criterio la lista de personas. 
+		try {
+			PrintStream ps = new PrintStream( "personas.txt" );
+			for (Persona p : listaPersonas) {
+				ps.println( p.aLinea() );
+			}
+			ps.close();
+		} catch (FileNotFoundException e) {
+			System.err.println( "Error: fichero no encontrado" );
+		}
+		// TODO 6b - ¿Qué problema hay?
+		// Que no se pueden diferenciar fácil empleados de clientes
+		// TODO 6c - ¿Cómo lo solucionas?
+		// Podría leerse toda la línea y dependiendo del número de valores ser uno u otro, pero eventualmente podrían incluso ser iguales
+		// Así que mejor una marca EXPLICITA del tipo de objeto - al inicio y así ya lo tenemos desde el inicio
+		// TODO 6d - Soluciónalo
+		// Solucionado en clases Empleado, Cliente
+		// TODO 7 - Carga la lista de personas del fichero de texto y comprueba que se ha cargado bien 
+		//          con métodos constructores crearDesde( String[] ) en cada clase ¿qué errores pueden ocurrir?
+		ArrayList<Persona> personasCarga = new ArrayList<>();
+		try (Scanner scanner = new Scanner(new FileInputStream( "personas.txt" ))) {
+			while (scanner.hasNextLine()) {
+				String linea = scanner.nextLine();
+				String[] partes = linea.split("\t");
+				Persona p = Persona.crearDesdeLinea( linea );
+				if (p!=null) {
+					personasCarga.add( p );
+				}
+			}
+		} catch (FileNotFoundException e) {
+			System.err.println("Error: fichero no encontrado");
+		}
+		System.out.println( "Tras la carga: " + personasCarga );
+		// Ver errores en Persona.crearDesdeLinea
+		// Comentar la duplicidad de código en crearDesde - tiene que ver con objetos aún no creados - se podría con objetos dummys o con constructores vacíos
+		
+		// TODO 8 - Y si hubiera composición, por ejemplo si Persona incluyera una lista de Reuniones a las que ha asistido?  (hay muchas personas en cada reunión)
+		//          (Imaginemos una clase Reunion que tiene id, fecha, tema, duración, resumen, lista de personas participantes)
+		// Lo mejor es guardar aparte las reuniones y meter códigos en las personas
+		// Si no se tiene cuidado genera recursividad infinita (referencias mutuas)
+	}
+
+	// TODO RESUELTO 1 -- aquí abajo
+	// TODO RESUELTO 2 -- aquí abajo
+	public static void crearDatosDePrueba(List<Empleado> empleados, List<Cliente> clientes) {
+		try {
+			// EMPLEADOS
+			empleados.add(new Empleado(12345678, 'Z', "Ana", "López", 1983, "Gerente"));
+			empleados.add(new Empleado(56789012, 'B', "Elena", "Martín", 1997, "RRHH"));  // Es B, no L
+			empleados.add(new Empleado(23456789, 'D', "Luis Alejandro", "Pérez", 1988, "Analista"));
+			empleados.add(new Empleado(45678901, 'G', "Carlos", "Ruiz", 2005, "Tester"));   // Es G, no S
+			empleados.add(new Empleado(67890123, 'B', "Javier", "Sánchez", 2002, "Soporte"));
+			empleados.add(new Empleado(34567890, 'V', "Marta", "García", 1999, "Programador"));
+			// CLIENTES
+			clientes.add(new Cliente(66666666, 'Q', "Cliente", "Seis", 1993, 6, 430.20));
+			clientes.add(new Cliente(11111111, 'H', "Cliente", "Uno", 1991, 1, 1200.50));
+			clientes.add(new Cliente(55555555, 'K', "Cliente", "Cinco", 1977, 5, 0.0));
+			clientes.add(new Cliente(22222222, 'J', "Cliente", "Dos", 1983, 2, 350.75));
+			clientes.add(new Cliente(33333333, 'P', "Cliente", "Tres", 1968, 3, -50.00));
+			clientes.add(new Cliente(44444444, 'A', "Cliente", "Cuatro", 2001, 4, 9999.99));
+		} catch (PersonaException e) {
+			// INTERESANTE: SI NO SE PONE NADA SE NOS PUEDE PASAR DESAPERCIBIDO
+			// (Si no lo ponemos, podríamos no darnos cuenta de que se está perdiendo algún dato)
+			System.err.println("Error al crear datos de prueba: " + e.getMessage());
+		}
+	}	
+	
+}
