@@ -25,6 +25,24 @@ public class UtilsString {
 		return s.substring(0, largo) + "...";
 	}
 	
+	/** Convierte un string en otro comparable de forma correcta
+	 * en castellano, considerando tanto el orden alfabético
+	 * como las mayúsculas, tildes, eñes o diéresis
+	 * @param s	String original
+	 * @return	String convertido para su comparación
+	 */
+	public static String convierteOrd( String s ) {
+		String ret = s.toLowerCase();
+		ret = ret.replaceAll( "á", "a" );
+		ret = ret.replaceAll( "é", "e" );
+		ret = ret.replaceAll( "í", "i" );
+		ret = ret.replaceAll( "ó", "o" );
+		ret = ret.replaceAll( "ú", "u" );
+		ret = ret.replaceAll( "ü", "u" );
+		ret = ret.replaceAll( "ñ", "nzz" );
+		return ret;
+	}
+	
 	public static void main(String[] args) {
 		// Prueba convencional (no estructurada, no exhaustiva, no automatizable)
 //		// Versión 1
@@ -53,26 +71,6 @@ public class UtilsString {
 		}
 		// System.out.println( wrapString( prueba, 10 ) );
 		// System.out.println( wrapString( quitarTabsYSaltosLinea(prueba), 10 ) );
-
 	}
-
-	/** Convierte un string en otro comparable de forma correcta
-	 * en castellano, considerando tanto el orden alfabético
-	 * como las mayúsculas, tildes, eñes o diéresis
-	 * @param s	String original
-	 * @return	String convertido para su comparación
-	 */
-	public static String convierteOrd( String s ) {
-		String ret = s.toLowerCase();
-		ret = ret.replaceAll( "á", "a" );
-		ret = ret.replaceAll( "é", "e" );
-		ret = ret.replaceAll( "í", "i" );
-		ret = ret.replaceAll( "ó", "o" );
-		ret = ret.replaceAll( "ú", "u" );
-		ret = ret.replaceAll( "ü", "u" );
-		ret = ret.replaceAll( "ñ", "nzz" );
-		return ret;
-	}
-	
 	
 }
