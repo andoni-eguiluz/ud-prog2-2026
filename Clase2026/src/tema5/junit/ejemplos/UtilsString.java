@@ -12,7 +12,7 @@ public class UtilsString {
 	 * @return	Mismo string sustituyendo \t con el carácter | y \n con el carácter #; Devuelve null si s es null.
 	 */
 	public static String quitarTabsYSaltosLinea( String s ) {
-		return s.replaceAll( "\n", "#" ).replaceAll( "\t", "#" );
+		return s.replaceAll( "\n", "#" ).replaceAll( "\t", "|" );
 	}
 	
 	/** Devuelve cualquier string truncado al número de caracteres indicado, con puntos suspensivos al final si se ha truncado
@@ -45,7 +45,7 @@ public class UtilsString {
 	
 	public static void main(String[] args) {
 		// Prueba convencional (no estructurada, no exhaustiva, no automatizable)
-//		// Versión 1
+		// Versión 1
 //		String prueba = "Hola\nEsto es un string con tres líneas\ny\tvarios\ttabuladores.";
 //		System.out.println( prueba );
 //		System.out.println( quitarTabsYSaltosLinea( prueba ));
