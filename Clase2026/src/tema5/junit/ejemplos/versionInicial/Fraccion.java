@@ -1,4 +1,4 @@
-package tema5.junit.ejemplos;
+package tema5.junit.ejemplos.versionInicial;
 
 
 // TODO Hacer pruebas con JUnit para mejorar esta clase.
@@ -13,15 +13,11 @@ public class Fraccion implements Comparable<Fraccion> {
 	protected int den;
 	
 	/** Crea una nueva fracción
-	 * @param num	Numerador	Cualquier entero
-	 * @param den	Denominador	Cualquier entero excepto cero
-	 * @throws ArithmeticException	Si el denominador es cero
+	 * @param num	Numerador
+	 * @param den	Denominador
 	 */
-	public Fraccion(int num, int den) throws ArithmeticException {
+	public Fraccion(int num, int den) {
 		super();
-		if (den==0) {
-			throw new ArithmeticException( "Fracción con denominador 0" );
-		}
 		this.num = num;
 		this.den = den;
 	}
@@ -51,12 +47,6 @@ public class Fraccion implements Comparable<Fraccion> {
 	}
 		// Devuelve el Máximo Común Divisor de dos números
 		private static int mcd( int a, int b ) {
-			// Caso especial: mcd de 0 y n es n
-			if (a==0) {
-				return b;
-			} else if (b==0) {
-				return a;
-			}
 			a = Math.abs(a); b = Math.abs(b);
 			int mcd = Math.min(a, b);
 			while ((a%mcd!=0 || b%mcd!=0) && mcd>1)
@@ -68,9 +58,8 @@ public class Fraccion implements Comparable<Fraccion> {
 	 * @param f1	Operando 1
 	 * @param f2	Operando 2
 	 * @return	Fracción resultado f1+f2
-	 * @throws NullPointerException	Si alguna de las dos fracciones es null
 	 */
-	public static Fraccion suma( Fraccion f1, Fraccion f2 ) throws NullPointerException {
+	public static Fraccion suma( Fraccion f1, Fraccion f2 ) {
 		return new Fraccion( f1.num*f2.den + f2.num*f1.den, f1.den*f2.den );
 	}
 	
@@ -78,9 +67,8 @@ public class Fraccion implements Comparable<Fraccion> {
 	 * @param f1	Operando 1
 	 * @param f2	Operando 2
 	 * @return	Fracción resultado f1-f2
-	 * @throws NullPointerException	Si alguna de las dos fracciones es null
 	 */
-	public static Fraccion resta( Fraccion f1, Fraccion f2 ) throws NullPointerException {
+	public static Fraccion resta( Fraccion f1, Fraccion f2 ) {
 		return new Fraccion( f1.num*f2.den - f2.num*f1.den, f1.den*f2.den );
 	}
 	
@@ -88,9 +76,8 @@ public class Fraccion implements Comparable<Fraccion> {
 	 * @param f1	Operando 1
 	 * @param f2	Operando 2
 	 * @return	Fracción resultado f1*f2
-	 * @throws NullPointerException	Si alguna de las dos fracciones es null
 	 */
-	public static Fraccion multiplica( Fraccion f1, Fraccion f2 ) throws NullPointerException {
+	public static Fraccion multiplica( Fraccion f1, Fraccion f2 ) {
 		return new Fraccion( f1.num*f2.num, f1.den*f2.den );
 	}
 	
@@ -98,10 +85,8 @@ public class Fraccion implements Comparable<Fraccion> {
 	 * @param f1	Operando 1
 	 * @param f2	Operando 2
 	 * @return	Fracción resultado f1/f2
-	 * @throws ArithmeticException	Si se divide entre la fracción f2 = 0/n 
-	 * @throws NullPointerException	Si alguna de las dos fracciones es null
 	 */
-	public static Fraccion divide( Fraccion f1, Fraccion f2 ) throws ArithmeticException, NullPointerException {
+	public static Fraccion divide( Fraccion f1, Fraccion f2 ) {
 		return new Fraccion( f1.num*f2.den, f1.den*f2.num );
 	}
 	
