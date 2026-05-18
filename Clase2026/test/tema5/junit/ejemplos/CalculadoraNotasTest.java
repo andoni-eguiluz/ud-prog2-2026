@@ -10,7 +10,8 @@ class CalculadoraNotasTest {
 	
 	@Test
 	void testMedia_Sencilla() {
-		assertEquals( 7.0, CalculadoraNotas.media( 6, 8), DELTA );
+		assertEquals( 7.0, CalculadoraNotas.media( 6, 8 ), DELTA );
+		assertEquals( 2.5, CalculadoraNotas.media( 2, 3 ), DELTA );
 	}
 	
 	@Test
